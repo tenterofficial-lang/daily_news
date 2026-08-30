@@ -75,8 +75,11 @@ raw_json_str = parts[1].replace("SECTION 2: JSON DATA", "").replace("```json", "
 
 # ==========================================
 # 3. SAVE TXT BRIEF & APPEND TO CSV
-# ==========================================
 today = datetime.now().strftime("%Y-%m-%d")
+
+# Create briefs directory if it does not exist
+os.makedirs("briefs", exist_ok=True)
+
 brief_filename = f"briefs/brief_{today}.txt"
 
 with open(brief_filename, "w", encoding="utf-8") as f:
