@@ -1,15 +1,15 @@
 DAILY EXECUTIVE NEWS BRIEF - 2026-08-31
 
-<h2>Geopolitics & International Security</h2>
+<h2>Technology & Artificial Intelligence</h2>
 <ul>
-  <li><strong>US-Iran Military Escalation:</strong> Forces from the United States and Iran traded strikes for the first time in weeks, signaling a resurgence in regional tension.</li>
-  <li><strong>Swiss Fatal Shooting Arrest:</strong> Swiss authorities have taken a suspect into custody following a shooting at a rave that left one woman dead.</li>
-  <li><strong>South African Aviation Controversy:</strong> A South African airline is facing public scrutiny after defending a low-altitude aerial stunt conducted over a packed stadium.</li>
+  <li><strong>OpenShot 4.0 Released:</strong> The open-source video editor launches a major update, introducing expanded screen recording, streamlined editing workflows, and enhanced color-grading capabilities.</li>
+  <li><strong>ChatGPT Work Tool Reference Published:</strong> A new resource reference details practical enterprise workflows, skill integrations, and tool applications for developer and business implementation.</li>
+  <li><strong>Playa Phone Launched:</strong> A minimalist mobile device designed for low-distraction environments debuts, catering to users seeking reduced digital connectivity during events.</li>
 </ul>
 
-<h2>Technology & Software Infrastructure</h2>
+<h2>Global News & Geopolitics</h2>
 <ul>
-  <li><strong>Apache Iggy Achieves TLP Status:</strong> Apache Iggy, a high-performance message streaming platform written in Rust, has officially graduated to an Apache Top-Level Project.</li>
-  <li><strong>OpenShot 4.0 Release:</strong> OpenShot launched version 4.0, delivering significant upgrades to video recording, editing workflows, and color-grading tools.</li>
-  <li><strong>ChatGPT Enterprise Tooling Reference:</strong> A dedicated skill and tool reference framework has been published to standardize developer and workforce integration with ChatGPT.</li>
+  <li><strong>US-Iran Strikes Signal Renewed Friction:</strong> Military forces from the United States and Iran traded strikes for the first time in weeks, breaking a recent period of relative calm in regional engagements.</li>
+  <li><strong>Suspect Arrested in Swiss Rave Homicide:</strong> Police in Switzerland have taken a man into custody following a fatal shooting at an outdoor rave that resulted in the death of a young woman.</li>
+  <li><strong>Airline Defends Low-Altitude Stadium Flyover:</strong> A South African carrier is pushing back against public safety criticism following a controversial low-altitude aerial maneuver conducted over a populated venue.</li>
 </ul>
