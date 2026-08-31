@@ -1,102 +1,93 @@
 import os
-import json
-import resend
+import datetime
 import feedparser
 import pandas as pd
-from datetime import datetime
-import google.generativeai as genai
+import resend
+from google import genai
 
 # ==========================================
-# CONFIGURATION
-# Reads keys directly from GitHub Secrets (or local fallback if testing locally)
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "YOUR_LOCAL_GEMINI_KEY")
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "re_YOUR_LOCAL_RESEND_KEY")
-RECIPIENT_EMAIL = "tenter.official@gmail.com" # Where you want to receive the email
+# 1. CONFIGURATION
+# ==========================================
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
+RECIPIENT_EMAIL = "tenter.official@gmail.com"
 
-# Setup API keys
-os.environ["GOOGLE_API_KEY"] = GEMINI_API_KEY
-genai.configure()
 resend.api_key = RESEND_API_KEY
 
-# ==========================================
-# 1. FETCH EXPANDED RSS FEEDS
-# ==========================================
 RSS_FEEDS = {
-    "World": "http://feeds.bbci.co.uk/news/world/rss.xml",
-    "Business": "http://feeds.bbci.co.uk/news/business/rss.xml",
-    "Tech": "https://feeds.feedburner.com/TechCrunch/",
-    "Sports": "http://feeds.bbci.co.uk/sport/rss.xml",
-    "Crypto": "https://cointelegraph.com/rss"
+    "Tech & AI": "https://news.ycombinator.com/rss",
+    "World News": "http://feeds.bbci.co.uk/news/world/rss.xml",
+    "Business & Markets": "https://search.cnbc.com/rs/search/combinedrender?target=partner&partnerId=2000&id=10000664&type=rss"
 }
 
+# ==========================================
+# 2. FETCH NEWS FEEDS
+# ==========================================
 print("Fetching live news feeds...")
-raw_articles = []
+raw_news_data = ""
+csv_records = []
 
 for category, url in RSS_FEEDS.items():
     feed = feedparser.parse(url)
-    for entry in feed.entries[:3]:  # Top 3 articles per category
-        raw_articles.append({
+    raw_news_data += f"\n--- {category.upper()} ---\n"
+    for entry in feed.entries[:3]:
+        title = entry.title
+        link = entry.link
+        raw_news_data += f"- {title} ({link})\n"
+        csv_records.append({
             "category": category,
-            "title": entry.title,
-            "summary": getattr(entry, 'summary', ''),
-            "link": entry.link,
-            "published": getattr(entry, 'published', '')
+            "headline": title,
+            "source_url": link,
+            "date": datetime.datetime.now().strftime("%Y-%m-%d")
         })
 
 # ==========================================
-# 2. GENERATE AI EXECUTIVE BRIEF
+# 3. GENERATE AI BRIEF (GOOGLE GENAI SDK)
+# ==========================================
+print("Generating AI Brief with Gemini...")
+client = genai.Client(api_key=GEMINI_API_KEY)
+
 prompt = f"""
 You are an executive news editor. Review the following raw news items:
 {raw_news_data}
 
-Write a concise Daily Executive Brief. 
+Write a concise Daily Executive Brief.
 
 STRICT FORMATTING INSTRUCTIONS:
-- Do NOT use Markdown syntax (no ###, no **, no *).
+- Do NOT use Markdown syntax (do NOT use ###, **, or *).
 - Return your output using pure, clean HTML tags only.
 - Use <h2> for Category Headers (e.g., <h2>Global Security & Geopolitics</h2>).
 - Use <ul> and <li> for news bullets.
 - Wrap primary headlines inside <strong> tags (e.g., <li><strong>US-Iran Strikes Escalation:</strong> Military tension flared...</li>).
 """
 
-response = model.generate_content(prompt)
+response = client.models.generate_content(
+    model="gemini-3.6-flash",
+    contents=prompt
+)
 html_formatted_brief = response.text
 
 # ==========================================
-# 3. SAVE TXT BRIEF & APPEND TO CSV
-today = datetime.now().strftime("%Y-%m-%d")
-
-# Create briefs directory if it does not exist
+# 4. SAVE TXT BRIEF & APPEND CSV
+# ==========================================
+today = datetime.datetime.now().strftime("%Y-%m-%d")
 os.makedirs("briefs", exist_ok=True)
 
-brief_filename = f"briefs/brief_{today}.txt"
+with open(f"briefs/brief_{today}.txt", "w", encoding="utf-8") as f:
+    f.write(f"DAILY EXECUTIVE NEWS BRIEF - {today}\n\n{html_formatted_brief}")
 
-with open(brief_filename, "w", encoding="utf-8") as f:
-    f.write(f"DAILY EXECUTIVE NEWS BRIEF - {today}\n")
-    f.write("=" * 40 + "\n\n")
-    f.write(human_brief)
-
-print(f"Saved human brief to: {brief_filename}")
-
-parsed_data = json.loads(raw_json_str)
-for item in parsed_data:
-    item["date"] = today
-
-df_new = pd.DataFrame(parsed_data)
-csv_filename = "news_archive.csv"
-
-if os.path.exists(csv_filename):
-    df_new.to_csv(csv_filename, mode='a', header=False, index=False, encoding="utf-8-sig")
+df_new = pd.DataFrame(csv_records)
+if os.path.exists("news_archive.csv"):
+    df_existing = pd.read_csv("news_archive.csv")
+    df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+    df_combined.to_csv("news_archive.csv", index=False)
 else:
-    df_new.to_csv(csv_filename, mode='w', header=True, index=False, encoding="utf-8-sig")
-
-print(f"Appended {len(parsed_data)} articles to: {csv_filename}")
+    df_new.to_csv("news_archive.csv", index=False)
 
 # ==========================================
-# 4. SEND EMAIL VIA RESEND
-today = datetime.now().strftime("%Y-%m-%d")
-
-subject = f"📰 Tenter AI Morning Brief - {today}"
+# 5. DISPATCH EMAIL VIA RESEND
+# ==========================================
+print("Sending styled HTML email...")
 
 html_body = f"""
 <!DOCTYPE html>
@@ -162,10 +153,11 @@ html_body = f"""
 </html>
 """
 
-# Send via Resend
 resend.Emails.send({
     "from": "onboarding@resend.dev",
     "to": RECIPIENT_EMAIL,
-    "subject": subject,
+    "subject": f"📰 Tenter AI Morning Brief - {today}",
     "html": html_body
 })
+
+print("Daily brief generated and sent successfully!")
