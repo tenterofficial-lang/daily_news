@@ -1,15 +1,15 @@
 DAILY EXECUTIVE NEWS BRIEF - 2026-08-31
 
-<h2>Technology & Artificial Intelligence</h2>
+<h2>Global Security & Geopolitics</h2>
 <ul>
-  <li><strong>OpenShot 4.0 Released:</strong> The open-source video editor launches a major update, introducing expanded screen recording, streamlined editing workflows, and enhanced color-grading capabilities.</li>
-  <li><strong>ChatGPT Work Tool Reference Published:</strong> A new resource reference details practical enterprise workflows, skill integrations, and tool applications for developer and business implementation.</li>
-  <li><strong>Playa Phone Launched:</strong> A minimalist mobile device designed for low-distraction environments debuts, catering to users seeking reduced digital connectivity during events.</li>
+  <li><strong>US-Iran Military Exchanges Resume:</strong> The United States and Iran have traded strikes for the first time in weeks, marking a renewed escalation in regional tensions.</li>
+  <li><strong>Fatal Shooting at Swiss Event:</strong> Authorities in Switzerland have arrested a suspect following a fatal shooting at a rave that left one woman dead.</li>
+  <li><strong>South African Airline Defends Low-Altitude Flyover:</strong> A regional carrier is facing scrutiny after defending a controversial low-altitude stunt performed directly over a packed stadium.</li>
 </ul>
 
-<h2>Global News & Geopolitics</h2>
+<h2>Technology & Enterprise Infrastructure</h2>
 <ul>
-  <li><strong>US-Iran Strikes Signal Renewed Friction:</strong> Military forces from the United States and Iran traded strikes for the first time in weeks, breaking a recent period of relative calm in regional engagements.</li>
-  <li><strong>Suspect Arrested in Swiss Rave Homicide:</strong> Police in Switzerland have taken a man into custody following a fatal shooting at an outdoor rave that resulted in the death of a young woman.</li>
-  <li><strong>Airline Defends Low-Altitude Stadium Flyover:</strong> A South African carrier is pushing back against public safety criticism following a controversial low-altitude aerial maneuver conducted over a populated venue.</li>
+  <li><strong>Apache Iggy Achieves Top-Level Project Status:</strong> The Rust-based high-performance message streaming platform Apache Iggy has officially graduated to an Apache Top-Level Project (TLP).</li>
+  <li><strong>OpenShot Launches Version 4.0:</strong> Open-source video editing software OpenShot released major update 4.0, featuring overhauled recording, editing, and color-grading capabilities.</li>
+  <li><strong>Playa Phone Enters Minimalist Hardware Market:</strong> Startup Playa Phone launched its minimalist device, targeting growing consumer demand for distraction-free mobile hardware.</li>
 </ul>
