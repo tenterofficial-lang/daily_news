@@ -136,9 +136,9 @@ html_body = f"""
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://raw.githubusercontent.com/tenterofficial-lang/daily_news/main/logo.png" alt="Tenter AI" class="logo" />
-      <div class="sub-header">Executive Daily Brief</div>
-    </div>
+  <div style="font-size: 24px; font-weight: 800; color: #ffffff; letter-spacing: 2px;">TENTER <span style="color: #38bdf8;">AI</span></div>
+  <div class="sub-header">Executive Daily Brief</div>
+</div>
     
     <div class="content">
       <div class="date-badge">📅 {today}</div>
