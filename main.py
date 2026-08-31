@@ -44,34 +44,23 @@ for category, url in RSS_FEEDS.items():
         })
 
 # ==========================================
-# 2. GENERATE AI SUMMARY & DATA
-# ==========================================
-model = genai.GenerativeModel('gemini-3.6-flash')
-
+# 2. GENERATE AI EXECUTIVE BRIEF
 prompt = f"""
-You are an executive news editor. Review these raw news entries:
-{json.dumps(raw_articles, indent=2)}
+You are an executive news editor. Review the following raw news items:
+{raw_news_data}
 
-Provide TWO outputs in your response:
+Write a concise Daily Executive Brief. 
 
-SECTION 1: MORNING BRIEF
-Write a clean, professional, readable executive summary of today's key stories formatted in markdown text.
-
-SECTION 2: JSON DATA
-Provide a valid raw JSON array of objects representing each article with these exact keys:
-"category", "headline", "ai_takeaway", "source_url"
-
-Separate SECTION 1 and SECTION 2 using exact boundary delimiter: ===JSON_START===
-Do not include markdown code block backticks inside the JSON section.
+STRICT FORMATTING INSTRUCTIONS:
+- Do NOT use Markdown syntax (no ###, no **, no *).
+- Return your output using pure, clean HTML tags only.
+- Use <h2> for Category Headers (e.g., <h2>Global Security & Geopolitics</h2>).
+- Use <ul> and <li> for news bullets.
+- Wrap primary headlines inside <strong> tags (e.g., <li><strong>US-Iran Strikes Escalation:</strong> Military tension flared...</li>).
 """
 
 response = model.generate_content(prompt)
-
-full_text = response.text.strip()
-parts = full_text.split("===JSON_START===")
-
-human_brief = parts[0].replace("SECTION 1: MORNING BRIEF", "").strip()
-raw_json_str = parts[1].replace("SECTION 2: JSON DATA", "").replace("```json", "").replace("```", "").strip()
+html_formatted_brief = response.text
 
 # ==========================================
 # 3. SAVE TXT BRIEF & APPEND TO CSV
@@ -104,15 +93,10 @@ else:
 print(f"Appended {len(parsed_data)} articles to: {csv_filename}")
 
 # ==========================================
-# 4. SEND EMAIL DISPATCH VIA RESEND
-# ==========================================
-print("Sending branded morning brief to email...")
+# 4. SEND EMAIL VIA RESEND
+today = datetime.now().strftime("%Y-%m-%d")
 
-# Replace with your direct hosted image link
-LOGO_URL = "https://i.imgur.com/cnOXzmS.png"  
-
-# Convert markdown headers/bullets into styled HTML cards
-formatted_brief = human_brief.replace('\n', '<br>')
+subject = f"📰 Tenter AI Morning Brief - {today}"
 
 html_body = f"""
 <!DOCTYPE html>
@@ -121,75 +105,67 @@ html_body = f"""
   <meta charset="utf-8">
   <style>
     body {{
-      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
-      background-color: #0f172a;
-      color: #e2e8f0;
-      margin: 0;
-      padding: 20px;
+      margin: 0; padding: 0; background-color: #f4f6f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }}
     .container {{
-      max-width: 600px;
-      margin: 0 auto;
-      background-color: #1e293b;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #334155;
+      max-width: 600px; margin: 20px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }}
     .header {{
-      background-color: #000000;
-      padding: 25px;
-      text-align: center;
-      border-bottom: 2px solid #00f2fe;
+      background-color: #0f172a; padding: 24px; text-align: center;
     }}
-    .header img {{
-      max-width: 220px;
-      height: auto;
+    .logo {{
+      max-width: 140px; height: auto; display: block; margin: 0 auto;
+    }}
+    .sub-header {{
+      color: #94a3b8; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; font-weight: 600;
     }}
     .content {{
-      padding: 30px;
-      line-height: 1.6;
-      color: #cbd5e1;
+      padding: 30px 24px; color: #334155; line-height: 1.6; font-size: 15px;
+    }}
+    .date-badge {{
+      display: inline-block; background: #e2e8f0; color: #475569; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 20px;
+    }}
+    h2 {{
+      color: #0f172a; font-size: 16px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; margin-top: 24px; text-transform: uppercase;
+    }}
+    ul {{
+      margin: 0 0 20px 0; padding-left: 20px;
+    }}
+    li {{
+      margin-bottom: 12px;
+    }}
+    strong {{
+      color: #0f172a;
     }}
     .footer {{
-      background-color: #0f172a;
-      padding: 15px;
-      text-align: center;
-      font-size: 12px;
-      color: #64748b;
-      border-top: 1px solid #334155;
+      background: #f8fafc; border-top: 1px solid #e2e8f0; padding: 20px; text-align: center; font-size: 12px; color: #94a3b8;
     }}
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <img src="{LOGO_URL}" alt="Tenter AI Logo">
+      <img src="https://raw.githubusercontent.com/tenterofficial-lang/daily_news/main/logo.png" alt="Tenter AI" class="logo" />
+      <div class="sub-header">Executive Daily Brief</div>
     </div>
+    
     <div class="content">
-      <h2 style="color: #ffffff; margin-top: 0;">Daily Executive Brief</h2>
-      <p style="color: #94a3b8; font-size: 14px;">Date: {today}</p>
-      <hr style="border: 0; border-top: 1px solid #334155; margin: 20px 0;">
-      <div>
-        {formatted_brief}
-      </div>
+      <div class="date-badge">📅 {today}</div>
+      {html_formatted_brief}
     </div>
+    
     <div class="footer">
-      <p>© 2026 Tenter AI • Automated Intelligence Services</p>
+      Generated automatically by Tenter AI Engine
     </div>
   </div>
 </body>
 </html>
 """
 
-email_params = {
-    "from": "Tenter AI <onboarding@resend.dev>",
-    "to": [RECIPIENT_EMAIL],
-    "subject": f"⚡ Tenter AI Morning Brief - {today}",
+# Send via Resend
+resend.Emails.send({
+    "from": "onboarding@resend.dev",
+    "to": RECIPIENT_EMAIL,
+    "subject": subject,
     "html": html_body
-}
-
-try:
-    email_response = resend.Emails.send(email_params)
-    print("Branded email sent successfully! ID:", email_response)
-except Exception as e:
-    print("Failed to send email:", e)
+})
