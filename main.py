@@ -1,10 +1,10 @@
 import os
 import datetime
+import time  # <-- ADD THIS HERE
 import feedparser
 import pandas as pd
 import resend
 from google import genai
-
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
@@ -61,11 +61,22 @@ STRICT FORMATTING INSTRUCTIONS:
 - Wrap primary headlines inside <strong> tags (e.g., <li><strong>US-Iran Strikes Escalation:</strong> Military tension flared...</li>).
 """
 
-response = client.models.generate_content(
-    model="gemini-3.6-flash",
-    contents=prompt
-)
-html_formatted_brief = response.text
+# Retry loop handles temporary 503 server errors automatically
+max_retries = 3
+for attempt in range(max_retries):
+    try:
+        response = client.models.generate_content(
+            model="gemini-3.6-flash",
+            contents=prompt
+        )
+        html_formatted_brief = response.text
+        break
+    except Exception as e:
+        if attempt < max_retries - 1:
+            print(f"Server busy (Attempt {attempt + 1}). Retrying in 5 seconds...")
+            time.sleep(5)
+        else:
+            raise e
 
 # ==========================================
 # 4. SAVE TXT BRIEF & APPEND CSV
