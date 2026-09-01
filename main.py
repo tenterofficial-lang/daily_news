@@ -1,16 +1,20 @@
 import os
 import datetime
-import time  # <-- ADD THIS HERE
+import time
 import feedparser
 import pandas as pd
 import resend
 from google import genai
+
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
 RECIPIENT_EMAIL = "tenter.official@gmail.com"
+
+# Verified custom domain sender
+SENDER_IDENTITY = "Tenter AI <newsletter@tenterai.com>"
 
 resend.api_key = RESEND_API_KEY
 
@@ -61,12 +65,12 @@ STRICT FORMATTING INSTRUCTIONS:
 - Wrap primary headlines inside <strong> tags (e.g., <li><strong>US-Iran Strikes Escalation:</strong> Military tension flared...</li>).
 """
 
-# Retry loop handles temporary 503 server errors automatically
+# Retry loop handles temporary server errors automatically
 max_retries = 3
 for attempt in range(max_retries):
     try:
         response = client.models.generate_content(
-            model="gemini-3.6-flash",
+            model="gemini-2.5-flash",
             contents=prompt
         )
         html_formatted_brief = response.text
@@ -147,9 +151,9 @@ html_body = f"""
 <body>
   <div class="container">
     <div class="header">
-  <div style="font-size: 24px; font-weight: 800; color: #ffffff; letter-spacing: 2px;">TENTER <span style="color: #38bdf8;">AI</span></div>
-  <div class="sub-header">Executive Daily Brief</div>
-</div>
+      <div style="font-size: 24px; font-weight: 800; color: #ffffff; letter-spacing: 2px;">TENTER <span style="color: #38bdf8;">AI</span></div>
+      <div class="sub-header">Executive Daily Brief</div>
+    </div>
     
     <div class="content">
       <div class="date-badge">📅 {today}</div>
@@ -165,7 +169,7 @@ html_body = f"""
 """
 
 resend.Emails.send({
-    "from": "onboarding@resend.dev",
+    "from": SENDER_IDENTITY,
     "to": RECIPIENT_EMAIL,
     "subject": f"📰 Tenter AI Morning Brief - {today}",
     "html": html_body
