@@ -1,4 +1,5 @@
 import os
+import glob
 import datetime
 import time
 import feedparser
@@ -11,7 +12,9 @@ from google import genai
 # ==========================================
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
-RECIPIENT_EMAIL = "tenter.official@gmail.com"
+
+# Fallback email if no CSV is found
+FALLBACK_RECIPIENT = "tenter.official@gmail.com"
 
 # Verified custom domain sender
 SENDER_IDENTITY = "Tenter AI <newsletter@tenterai.com>"
@@ -23,6 +26,49 @@ RSS_FEEDS = {
     "World News": "http://feeds.bbci.co.uk/news/world/rss.xml",
     "Business & Markets": "https://search.cnbc.com/rs/search/combinedrender?target=partner&partnerId=2000&id=10000664&type=rss"
 }
+
+# ==========================================
+# HELPER: DYNAMICALLY LOAD SUBSCRIBERS FROM CSV
+# ==========================================
+def get_recipients():
+    """Dynamically finds any beehiiv subscriber CSV in the root folder and extracts active emails."""
+    csv_files = glob.glob("*subscriber*.csv") + glob.glob("subscribers.csv")
+    
+    if not csv_files:
+        print(f"No subscriber CSV found. Defaulting to fallback email: {FALLBACK_RECIPIENT}")
+        return [FALLBACK_RECIPIENT]
+    
+    target_csv = csv_files[0]
+    print(f"Parsing subscriber data from: {target_csv}")
+    
+    try:
+        df = pd.read_csv(target_csv)
+        df.columns = [col.strip().lower() for col in df.columns]
+        
+        # Locate email column
+        email_col = next((c for c in ["email", "email_address", "subscriber_email"] if c in df.columns), None)
+        if not email_col:
+            print("Warning: Could not identify email column in CSV. Using fallback.")
+            return [FALLBACK_RECIPIENT]
+            
+        # Filter active subscribers if status column exists
+        status_col = next((c for c in ["status", "subscriber_status", "type"] if c in df.columns), None)
+        if status_col:
+            active_df = df[df[status_col].astype(str).str.lower().isin(["active", "subscribed"])]
+            emails = active_df[email_col].dropna().unique().tolist()
+        else:
+            emails = df[email_col].dropna().unique().tolist()
+            
+        if not emails:
+            print("No valid active emails found in CSV. Using fallback.")
+            return [FALLBACK_RECIPIENT]
+            
+        print(f"Successfully loaded {len(emails)} active subscriber(s).")
+        return emails
+        
+    except Exception as e:
+        print(f"Error reading CSV ({e}). Using fallback email.")
+        return [FALLBACK_RECIPIENT]
 
 # ==========================================
 # 2. FETCH NEWS FEEDS
@@ -65,7 +111,6 @@ STRICT FORMATTING INSTRUCTIONS:
 - Wrap primary headlines inside <strong> tags (e.g., <li><strong>US-Iran Strikes Escalation:</strong> Military tension flared...</li>).
 """
 
-# Retry loop handles temporary server errors automatically
 max_retries = 3
 for attempt in range(max_retries):
     try:
@@ -168,9 +213,12 @@ html_body = f"""
 </html>
 """
 
+# Dynamic recipient list from Beehiiv CSV
+recipients = get_recipients()
+
 resend.Emails.send({
     "from": SENDER_IDENTITY,
-    "to": RECIPIENT_EMAIL,
+    "to": recipients,
     "subject": f"📰 Tenter AI Morning Brief - {today}",
     "html": html_body
 })
