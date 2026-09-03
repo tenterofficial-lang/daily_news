@@ -2,14 +2,14 @@ DAILY EXECUTIVE NEWS BRIEF - 2026-09-03
 
 <h2>Technology & Artificial Intelligence</h2>
 <ul>
-  <li><strong>Google Releases Gemini 3.8 Flash and Cyber Models:</strong> Google announced Gemini 3.8 Flash along with a specialized 3.8 Flash Cyber variant, focusing on high-speed inference and enhanced threat-detection capabilities for enterprise security teams.</li>
-  <li><strong>Meta Updates Developer Toolkit with Muse Spark 1.3:</strong> Meta released Muse Spark 1.3, providing developers with improved foundational capabilities for generative AI application building.</li>
-  <li><strong>Computer Museum of America Launches Reclamation Project:</strong> The Computer Museum of America initiated a new effort aimed at recovering, preserving, and archiving key historical computing artifacts and early technology hardware.</li>
+  <li><strong>Meta Launches Muse Spark 1.3:</strong> Meta has released version 1.3 of its Muse Spark model, expanding capabilities within its developer AI toolkit.</li>
+  <li><strong>Polars 2.0 Pre-Release Announced:</strong> The high-performance Dataframe library Polars has unveiled its 2.0 pre-release, promising core enhancements for large-scale data processing.</li>
+  <li><strong>Web Performance Engineering Insights:</strong> A new technical deep-dive highlights modern strategies to mitigate browser main thread congestion and optimize front-end application response times.</li>
 </ul>
 
-<h2>Global Security & Geopolitics</h2>
+<h2>World News & Global Affairs</h2>
 <ul>
-  <li><strong>Fatal Strike on Saudi Tanker Escalates Gulf Tensions:</strong> Saudi Arabia reported that an Iranian attack on a Saudi oil vessel killed two Filipino sailors, intensifying concerns over vital commercial shipping lanes in the region.</li>
-  <li><strong>UN Issues Alert for Severe 'Supersized' El Niño:</strong> The United Nations warned global leaders to brace for extreme weather patterns, potential supply chain shocks, and agricultural disruptions as a severe El Niño event forms.</li>
-  <li><strong>Channel Traffickers Adapt to Crackdown with 'Mega-Dinghies':</strong> Human smuggling syndicates operating across the English Channel have shifted to deploying larger, overcrowded craft to bypass stricter enforcement on smaller vessel supply chains.</li>
+  <li><strong>UN Issues Warning Over 'Supersized' El Niño:</strong> Global authorities are urging nations to prepare for extreme weather risks, agricultural impacts, and supply chain disruptions as El Niño intensifies.</li>
+  <li><strong>Feminist Icon Gloria Steinem Dies at 92:</strong> Renowned journalist, author, and civil rights leader Gloria Steinem has passed away, leaving behind a lasting legacy in global social reform.</li>
+  <li><strong>Channel Smuggling Networks Shift to Larger Vessels:</strong> Human traffickers operating along the UK-France border are deploying 'mega-dinghies' to bypass heightened maritime enforcement efforts.</li>
 </ul>
