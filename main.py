@@ -31,44 +31,26 @@ RSS_FEEDS = {
 # HELPER: DYNAMICALLY LOAD SUBSCRIBERS FROM CSV
 # ==========================================
 def get_recipients():
-    """Dynamically finds any beehiiv subscriber CSV in the root folder and extracts active emails."""
-    csv_files = glob.glob("*subscriber*.csv") + glob.glob("subscribers.csv")
-    
-    if not csv_files:
-        print(f"No subscriber CSV found. Defaulting to fallback email: {FALLBACK_RECIPIENT}")
-        return [FALLBACK_RECIPIENT]
-    
-    target_csv = csv_files[0]
-    print(f"Parsing subscriber data from: {target_csv}")
-    
+    """Fetches all live contacts directly from Resend's global audience list."""
     try:
-        df = pd.read_csv(target_csv)
-        df.columns = [col.strip().lower() for col in df.columns]
+        # Pulls all active contacts from your Resend account
+        response = resend.Contacts.list()
+        contacts_data = response.get("data", []) if isinstance(response, dict) else response.data
         
-        # Locate email column
-        email_col = next((c for c in ["email", "email_address", "subscriber_email"] if c in df.columns), None)
-        if not email_col:
-            print("Warning: Could not identify email column in CSV. Using fallback.")
-            return [FALLBACK_RECIPIENT]
-            
-        # Filter active subscribers if status column exists
-        status_col = next((c for c in ["status", "subscriber_status", "type"] if c in df.columns), None)
-        if status_col:
-            active_df = df[df[status_col].astype(str).str.lower().isin(["active", "subscribed"])]
-            emails = active_df[email_col].dropna().unique().tolist()
-        else:
-            emails = df[email_col].dropna().unique().tolist()
-            
-        if not emails:
-            print("No valid active emails found in CSV. Using fallback.")
-            return [FALLBACK_RECIPIENT]
-            
-        print(f"Successfully loaded {len(emails)} active subscriber(s).")
-        return emails
+        # Filter for subscribers who haven't unsubscribed
+        emails = [
+            c["email"] if isinstance(c, dict) else c.email 
+            for c in contacts_data 
+            if not (c.get("unsubscribed") if isinstance(c, dict) else getattr(c, "unsubscribed", False))
+        ]
         
+        if emails:
+            print(f"Successfully loaded {len(emails)} subscriber(s) directly from Resend.")
+            return emails
     except Exception as e:
-        print(f"Error reading CSV ({e}). Using fallback email.")
-        return [FALLBACK_RECIPIENT]
+        print(f"Error fetching contacts from Resend ({e}). Using fallback email.")
+    
+    return [FALLBACK_RECIPIENT]
 
 # ==========================================
 # 2. FETCH NEWS FEEDS
