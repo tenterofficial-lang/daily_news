@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenter AI News</title>
+  <style>
+    body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; color: #fff; margin: 0; }
+    .card { background: #111; padding: 2rem; border-radius: 12px; border: 1px solid #333; text-align: center; width: 100%; max-width: 400px; }
+    input { width: 80%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #444; background: #222; color: #fff; }
+    button { width: 85%; padding: 12px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: bold; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Subscribe to Tenter AI Brief</h2>
+    <p>Get daily AI summaries delivered directly to your inbox.</p>
+    <form id="subscribe-form">
+      <input type="email" id="email-input" placeholder="Enter your email" required />
+      <button type="submit" id="btn">Subscribe</button>
+    </form>
+    <p id="msg" style="margin-top: 15px; font-size: 14px;"></p>
+  </div>
+
+  <script>
+    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('email-input').value;
+      const msg = document.getElementById('msg');
+      const btn = document.getElementById('btn');
+      
+      btn.innerText = "Subscribing...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://api.resend.com/contacts', {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Bearer re_YOUR_ACTUAL_RESEND_KEY',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: email, unsubscribed: false })
+        });
+
+        if (res.ok) {
+          msg.style.color = "#4ade80";
+          msg.innerText = "Success! You are now subscribed.";
+          document.getElementById('email-input').value = "";
+        } else {
+          msg.style.color = "#f87171";
+          msg.innerText = "Error subscribing. Try again.";
+        }
+      } catch (err) {
+        msg.style.color = "#f87171";
+        msg.innerText = "Connection error.";
+      }
+      btn.innerText = "Subscribe";
+      btn.disabled = false;
+    });
+  </script>
+</body>
+</html>
