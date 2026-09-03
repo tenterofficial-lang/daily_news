@@ -3,59 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tenter AI News</title>
+  <title>Tenter AI Brief</title>
   <style>
-    body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background: #000; color: #fff; margin: 0; }
-    .card { background: #111; padding: 2rem; border-radius: 12px; border: 1px solid #333; text-align: center; width: 100%; max-width: 400px; }
-    input { width: 80%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #444; background: #222; color: #fff; }
-    button { width: 85%; padding: 12px; border-radius: 6px; border: none; background: #2563eb; color: #fff; font-weight: bold; cursor: pointer; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background: #0a0a0a; color: #fff; margin: 0; }
+    .card { background: #141414; padding: 2.5rem; border-radius: 16px; border: 1px solid #262626; text-align: center; width: 90%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    h2 { margin-top: 0; font-size: 1.5rem; }
+    p { color: #a3a3a3; font-size: 0.95rem; margin-bottom: 1.5rem; }
+    input { width: 100%; padding: 12px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #333; background: #0a0a0a; color: #fff; box-sizing: border-box; font-size: 1rem; }
+    input:focus { outline: none; border-color: #2563eb; }
+    button { width: 100%; padding: 12px; border-radius: 8px; border: none; background: #2563eb; color: #fff; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #1d4ed8; }
+    button:disabled { background: #1e3a8a; opacity: 0.7; cursor: not-allowed; }
+    #msg { margin-top: 15px; font-size: 14px; }
   </style>
 </head>
 <body>
   <div class="card">
     <h2>Subscribe to Tenter AI Brief</h2>
     <p>Get daily AI summaries delivered directly to your inbox.</p>
+
     <form id="subscribe-form">
-      <input type="email" id="email-input" placeholder="Enter your email" required />
+      <!-- Paste your Web3Forms Access Key inside value="" below -->
+      <input type="hidden" name="access_key" value="3eb3c9c0-95dd-475b-b191-b768998bd2a1">
+      <input type="hidden" name="subject" value="New Subscriber for Tenter AI!">
+      <input type="hidden" name="from_name" value="Tenter AI Landing Page">
+
+      <input type="email" name="email" id="email-input" placeholder="Enter your email" required />
       <button type="submit" id="btn">Subscribe</button>
     </form>
-    <p id="msg" style="margin-top: 15px; font-size: 14px;"></p>
+
+    <p id="msg"></p>
   </div>
 
   <script>
-    document.getElementById('subscribe-form').addEventListener('submit', async (e) => {
+    const form = document.getElementById('subscribe-form');
+    const msg = document.getElementById('msg');
+    const btn = document.getElementById('btn');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('email-input').value;
-      const msg = document.getElementById('msg');
-      const btn = document.getElementById('btn');
-      
+
       btn.innerText = "Subscribing...";
       btn.disabled = true;
+      msg.innerText = "";
+
+      const formData = new FormData(form);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
 
       try {
-        const res = await fetch('https://api.resend.com/contacts', {
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: {
-            'Authorization': 'RESEND_API_KEY',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
-          body: JSON.stringify({ email: email, unsubscribed: false })
+          body: json
         });
 
-        if (res.ok) {
+        const data = await res.json();
+
+        if (res.status === 200) {
           msg.style.color = "#4ade80";
           msg.innerText = "Success! You are now subscribed.";
-          document.getElementById('email-input').value = "";
+          form.reset();
         } else {
           msg.style.color = "#f87171";
-          msg.innerText = "Error subscribing. Try again.";
+          msg.innerText = data.message || "Error subscribing. Try again.";
         }
       } catch (err) {
         msg.style.color = "#f87171";
-        msg.innerText = "Connection error.";
+        msg.innerText = "Connection error. Please try again later.";
+      } finally {
+        btn.innerText = "Subscribe";
+        btn.disabled = false;
       }
-      btn.innerText = "Subscribe";
-      btn.disabled = false;
     });
   </script>
 </body>
