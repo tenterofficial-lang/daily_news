@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-04
+
+<h2>Technology & Artificial Intelligence</h2>
+<ul>
+  <li><strong>OpenAI Unveils GPT-6 Astra:</strong> OpenAI has announced GPT-6 Astra, introducing the next iteration of its flagship artificial intelligence model.</li>
+  <li><strong>Cerebras Achieves 1,500 Tokens/s with Qwen 3.8:</strong> Cerebras Systems has made the Qwen 3.8 27B model available on its inference platform, offering processing speeds up to 1,500 tokens per second.</li>
+  <li><strong>Termination of .name Top-Level Domain:</strong> The .name top-level domain is scheduled for decommissioning, prompting required migrations for impacted domain holders.</li>
+</ul>
+
+<h2>Global Affairs & World News</h2>
+<ul>
+  <li><strong>Nepal Requests Billions for Post-Flood Reconstruction:</strong> The Nepalese government announced it will require billions of dollars in international assistance to rebuild infrastructure following devastating flash floods.</li>
+  <li><strong>Argentina Reasserts Falklands Claim and Threatens Oil Sanctions:</strong> The Argentine president renewed sovereignty demands over the Falkland Islands while threatening legal and financial sanctions against foreign oil firms operating in the region.</li>
+  <li><strong>Juror Retention Dispute Escalates Lindsay Clancy Trial:</strong> Procedural tensions mounted after the presiding judge denied a defense motion to remove a juror in the high-profile Lindsay Clancy murder trial.</li>
+</ul>
