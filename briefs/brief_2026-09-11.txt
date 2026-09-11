@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-11
+
+<h2>Technology & Software Infrastructure</h2>
+<ul>
+  <li><strong>Shopify Shifts Back to Native Development:</strong> Shopify is transitioning its mobile codebase away from React Native to return to native Swift and Kotlin, marking a notable architectural shift for major enterprise platforms.</li>
+  <li><strong>Rust Query Engine Benchmarks Highlight Io_uring Drawbacks:</strong> An effort to swap MMAP for Io_uring in a high-performance Rust query engine resulted in unexpected slowdowns, illustrating limitations in modern Linux I/O frameworks under certain workloads.</li>
+  <li><strong>Industry Analysis Skeptical of AI Coding Agents:</strong> A detailed technical critique re-examines the actual productivity gains and long-term viability of AI development tools like Astra.</li>
+</ul>
+
+<h2>Global Security & International News</h2>
+<ul>
+  <li><strong>Houthis Seize Strategic Red Sea Port of Mokha:</strong> Yemeni Houthi forces have reportedly taken control of Mokha, further threatening critical maritime transport routes in the region.</li>
+  <li><strong>Casualties Rise Following Russian Strike on Ukrainian Shopping Mall:</strong> Ukrainian officials confirm at least five people were killed and 67 injured after a Russian strike hit a civilian commercial center.</li>
+  <li><strong>Speed Warning Issued Prior to Fatal Amazon Cargo Plane Crash:</strong> Flight recorder data reveals that pilots were alerted the aircraft was traveling at unsafe speeds shortly before the deadly crash.</li>
+</ul>
