@@ -1,0 +1,13 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-21
+
+<h2>Global Security & Geopolitics</h2>
+<ul>
+  <li><strong>Unprecedented Drone Strike on Moscow:</strong> Ukraine launched its largest drone attack on the Russian capital to date, deploying hundreds of unmanned aerial vehicles according to Moscow's mayor.</li>
+  <li><strong>German Political Turmoil:</strong> German Chancellor Merz publicly characterized recent state election losses as a disaster for his party, while affirming he will remain in office despite political pressure.</li>
+</ul>
+
+<h2>Technology & Artificial Intelligence</h2>
+<ul>
+  <li><strong>Samsung Expands AI Memory Output:</strong> Samsung is projected to more than double its manufacturing capacity for next-generation HBM4 and HBM4E DRAM to supply the accelerating AI hardware market.</li>
+  <li><strong>Google Releases Open Agentic Tool:</strong> Google introduced AX, an open agentic orchestrator aimed at managing and executing multi-agent AI workflows.</li>
+</ul>
