@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-22
+
+<h2>Global Security & Geopolitics</h2>
+<ul>
+  <li><strong>Lithuania Prepares Defense and Evacuation Contingencies:</strong> The Prime Minister stated the nation is prepared to resist potential Russian military aggression, while actively finalizing civilian evacuation strategies.</li>
+  <li><strong>Yemen Conflict Surge Triggers Red Sea Displacement:</strong> Intensified hostilities between Houthi militants and Saudi-backed coalitions have displaced thousands, prompting a surge of refugees fleeing across the Red Sea.</li>
+  <li><strong>G7 Urges Iran to Cease Houthi Support Ahead of UNGA:</strong> G7 leaders issued a joint statement demanding Tehran immediately halt arms shipments to Houthi forces in Yemen prior to the UN General Assembly.</li>
+</ul>
+
+<h2>Technology & Enterprise Media</h2>
+<ul>
+  <li><strong>Apple Music Expands to Physical Venues:</strong> Apple Music is opening a dedicated live concert venue at London's Battersea Power Station, marking a deeper push into live entertainment integration.</li>
+  <li><strong>Security Analysis Warns of "Spymarking" Risks:</strong> A new technical report outlines the privacy implications of covert tracking mechanisms ("spymarks") as an alternative to standard digital watermarks.</li>
+  <li><strong>Xiaomi Rolls Out MiMo v2.6:</strong> Xiaomi has published the latest iteration of its MiMo model framework, continuing its push into advanced AI infrastructure.</li>
+</ul>
