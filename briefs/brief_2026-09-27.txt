@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-27
+
+<h2>Global Security & Geopolitics</h2>
+<ul>
+  <li><strong>US-Iran Diplomatic Standoff:</strong> Tehran is awaiting an official response from Washington after Donald Trump rejected a proposed diplomatic deal concerning the Strait of Hormuz.</li>
+  <li><strong>Historic Tennessee Execution Case:</strong> Defense attorneys are mounting a final appeal for Christa Pike, who faces becoming the first woman executed in Tennessee in 200 years, arguing she is a victim of severe trauma.</li>
+  <li><strong>Fatal Aviation Incident in Quebec:</strong> Canadian authorities are investigating a tragic helicopter crash near Montreal that resulted in four fatalities.</li>
+</ul>
+
+<h2>Technology & Engineering</h2>
+<ul>
+  <li><strong>Georgist Economic Model Retrospective:</strong> A five-year review evaluates the practical viability and real-world results of Georgism and land value taxation concepts.</li>
+  <li><strong>Go Concurrency Overview:</strong> A new technical deep-dive simplifies core concurrency patterns and practical execution models within the Go programming ecosystem.</li>
+  <li><strong>PipePipe Open-Source Project:</strong> Developers have released PipePipe, a new hard fork of the NewPipe media application featuring integrated SponsorBlock support.</li>
+</ul>
