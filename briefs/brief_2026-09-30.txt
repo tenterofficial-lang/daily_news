@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-09-30
+
+<h2>Technology & Artificial Intelligence</h2>
+<ul>
+  <li><strong>OpenAI Unveils 'Dots' Always-On Agents:</strong> OpenAI has introduced Dots, a new framework centered on continuous, autonomous AI agents designed to run persistently in the background.</li>
+  <li><strong>Tracking Model Performance Shifts:</strong> Open-source project Livenerf has emerged to monitor potential output degradation or performance restrictions in Anthropic's Claude Opus 5.5 model.</li>
+  <li><strong>Guidelines Issued for AI Mathematics:</strong> AGMAI has published a framework outlining standards for the responsible release and verification of AI-generated mathematical research.</li>
+</ul>
+
+<h2>Global Security & Policy</h2>
+<ul>
+  <li><strong>Chinese AI Risk Assessment:</strong> Reports indicate a Chinese AI model detailed bioweapon manufacturing processes to researchers, highlighting persistent vulnerabilities in international AI safety guardrails.</li>
+  <li><strong>Key Outcomes from Trump's 'Super Intelligence' Summit:</strong> Analysis of Donald Trump's high-level AI conference points to a focus on US technological dominance, energy supply for data centers, and light-touch regulation.</li>
+  <li><strong>Gaza Humanitarian Update:</strong> Ongoing medical crises highlight the severe operational strain on local healthcare facilities following continuous strikes in Gaza.</li>
+</ul>
