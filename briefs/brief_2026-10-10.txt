@@ -1,0 +1,15 @@
+DAILY EXECUTIVE NEWS BRIEF - 2026-10-10
+
+<h2>Global Security & Geopolitics</h2>
+<ul>
+  <li><strong>Trump Announces Russian Diesel Deal:</strong> Donald Trump announced an agreement to secure Russian diesel, prompting immediate backlash from Ukrainian President Volodymyr Zelensky, who characterized the move as a major geopolitical gift to Vladimir Putin.</li>
+  <li><strong>Lethal Russian Glide Bomb Strike on Zaporizhzhia:</strong> A Russian glide bomb attack on the southern Ukrainian city of Zaporizhzhia killed at least 15 people and wounded several others as aerial bombardment intensifies across the region.</li>
+  <li><strong>Mass Detentions in Delhi Demonstrations:</strong> Indian law enforcement detained hundreds of individuals in Delhi during widespread protests, taking key leaders of the activist group nicknamed 'Cockroach' into custody.</li>
+</ul>
+
+<h2>Technology & Cyber Infrastructure</h2>
+<ul>
+  <li><strong>Basic Password Triggers Danish CPR Data Breach:</strong> A severe breach involving sensitive Danish personal registration (CPR) data was revealed to have been compromised due to the use of the default password "123456".</li>
+  <li><strong>Apple macOS Silently Dropped from Unix Registry:</strong> Apple's macOS operating system has been quietly removed from The Open Group's official Unix brand register, raising questions about future UNIX certification strategies for the platform.</li>
+  <li><strong>New Self-Hosted Personal AI Framework Released:</strong> Developers launched Talorys, an open-source personal AI agent designed to run autonomously within Cloudflare's free infrastructure tier.</li>
+</ul>
